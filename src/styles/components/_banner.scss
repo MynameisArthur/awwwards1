@@ -1,0 +1,34 @@
+.main {
+    height: 50vh; // fallback
+    height: calc(var(--vh, 1vh) * 50);
+    background-color: $white;
+    .row {
+        flex-direction: column;
+        justify-content: center;
+        h2 {
+            font-size: 3rem;
+            line-height: 4.2rem;
+            font-weight: 700;
+            z-index: 10;
+            color: $white;
+            mix-blend-mode: difference;
+            @include media('<=tablet') {
+                font-size: 2.4rem;
+                line-height: 3rem;
+            }
+            @include media('<=phone') {
+                margin-top: 72px;
+            }
+            .line {
+                span {
+                }
+            }
+        }
+        .btn-row {
+            a {
+                svg {
+                }
+            }
+        }
+    }
+}
