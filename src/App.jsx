@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import gsap from 'gsap';
 import Banner from './components/Banner';
 import Cases from './components/Cases';
 import Header from './components/Header';
@@ -9,6 +10,17 @@ function App() {
     useEffect(() => {
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
+        // timeline
+        const tl = gsap.timeline();
+        tl.from('.line span', 1.8, {
+            y: 100,
+            ease: 'power4.out',
+            delay: 1,
+            skewY: 7,
+            stagger: {
+                amount: 0.3,
+            },
+        });
     }, []);
     return (
         <div className='App'>
