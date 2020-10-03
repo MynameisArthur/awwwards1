@@ -1,13 +1,13 @@
 nav {
-    position: fixed;
     left: 0;
     top: -1px;
     width: 100%;
     height: 100%;
     z-index: 1;
-    // display: none;
+    display: none;
+    position: fixed;
     overflow: hidden;
-    background-color: $yellow;
+    background: $yellow;
     a {
         position: relative;
         &:after {
@@ -18,14 +18,15 @@ nav {
             display: block;
             margin-top: 5px;
             right: 0;
-            background-color: $black;
+            background: $black;
             transition: 0.4s ease;
         }
         &:hover {
-            &::after {
+            color: pink;
+            &:after {
                 width: 100%;
                 left: 0;
-                background-color: $black;
+                background: $black;
             }
         }
     }
@@ -35,9 +36,9 @@ nav {
         padding: 0 32px;
         @include media('<=654px') {
             flex-direction: column;
-        }
-        @include media('<=phone') {
-            padding: 0 16px;
+            @include media('<=phone') {
+                padding: 0 16px;
+            }
         }
         .nav-column {
             width: 45%;
@@ -62,26 +63,6 @@ nav {
                     margin-bottom: 1.2rem;
                 }
             }
-            .nav-links {
-                padding: 0;
-                margin: 0;
-                li {
-                    list-style: none;
-                    margin-bottom: 2.8rem;
-                    @include media('<=phone') {
-                        margin-bottom: 1.6rem;
-                    }
-                    a {
-                        font-weight: 600;
-                        font-size: 2.8rem;
-                        text-decoration: none;
-                        color: $black;
-                        @include media('<=phone') {
-                            font-size: 2rem;
-                        }
-                    }
-                }
-            }
             .nav-infos {
                 display: flex;
                 flex-wrap: wrap;
@@ -103,7 +84,7 @@ nav {
                     li {
                         font-weight: 300;
                         list-style: none;
-                        font-size: 1.4em;
+                        font-size: 1.4rem;
                         margin-bottom: 1.2rem;
                         @include media('<=tablet') {
                             font-size: 1.2rem;
@@ -116,6 +97,26 @@ nav {
                         a {
                             text-decoration: none;
                             color: $black;
+                        }
+                    }
+                }
+            }
+            .nav-links {
+                padding: 0;
+                margin: 0;
+                li {
+                    list-style: none;
+                    margin-bottom: 2.4rem;
+                    @include media('<=phone') {
+                        margin-bottom: 1.6rem;
+                    }
+                    a {
+                        font-weight: 600;
+                        font-size: 2.8rem;
+                        text-decoration: none;
+                        color: $black;
+                        @include media('<=phone') {
+                            font-size: 2rem;
                         }
                     }
                 }
