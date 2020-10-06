@@ -5,18 +5,23 @@ import gsap from 'gsap';
 
 let tl = gsap.timeline();
 
-const Header = ({dimensions}) => {
+const Header = ({history, dimensions}) => {
     const [menuState, setMenuState] = useState({menuOpened: false});
     useEffect(() => {
+        history.listen(() => {
+            setMenuState({menuOpened: false});
+        });
         if (menuState.menuOpened) {
             //run open menu animation
-            gsap.to('nav', {css: {display: 'block'}});
-            gsap.to('body', {css: {overflow: 'hidden'}});
-            tl.to('.App', {
-                duration: 1,
-                y: dimensions.width <= 654 ? '70vh' : dimensions.height / 1.75,
-                ease: 'expo.inOut',
-            })
+            tl.to('body', {duration: 0.01, css: {overflow: 'hidden'}})
+                .to('.App', {
+                    duration: 1,
+                    y:
+                        dimensions.width <= 654
+                            ? '70vh'
+                            : dimensions.height / 1.75,
+                    ease: 'expo.inOut',
+                })
                 .to('.hamburger-menu span', {
                     duration: 0.6,
                     delay: -1,
@@ -64,6 +69,60 @@ const Header = ({dimensions}) => {
                 });
         } else {
             //run close menu animation
+            tl.to('.App', {
+                duration: 1,
+                y: 0,
+                ease: 'expo.inOut',
+            })
+                .to('#circle', {
+                    duration: 0.6,
+                    delay: -0.6,
+                    css: {
+                        strokeDashoffset: -193,
+                        strokeDasharray: 227,
+                    },
+                })
+                .to('#Path_1', {
+                    duration: 0.4,
+                    delay: -0.6,
+                    css: {
+                        strokeDashoffset: 10,
+                        strokeDasharray: 10,
+                    },
+                })
+                .to('#Path_2', {
+                    duration: 0.4,
+                    delay: -0.6,
+                    css: {
+                        strokeDashoffset: 10,
+                        strokeDasharray: 10,
+                    },
+                })
+                .to('#Line_1', {
+                    duration: 0.4,
+                    delay: -0.6,
+                    css: {
+                        strokeDashoffset: 40,
+                        strokeDasharray: 40,
+                    },
+                })
+                .to('.hamburger-menu span', {
+                    duration: 0.6,
+                    delay: -0.6,
+                    scaleX: 1,
+                    transformOrigin: '50% 0%',
+                    ease: 'expo.inOut',
+                })
+                .to('.hamburger-menu-close', {
+                    css: {
+                        display: 'none',
+                    },
+                })
+                .to('body', {
+                    css: {
+                        overflow: 'auto',
+                    },
+                });
         }
     }, [menuState.menuOpened]);
     return (
@@ -71,7 +130,7 @@ const Header = ({dimensions}) => {
             <div className='container'>
                 <div className='row v-center space-between'>
                     <div className='logo'>
-                        <a href='/'>AGENCY.</a>
+                        <NavLink to='/'>AGENCY.</NavLink>
                     </div>
                     <div className='nav-toggle'>
                         <div
@@ -94,4 +153,4 @@ const Header = ({dimensions}) => {
     );
 };
 
-export default Header;
+export default withRouter(Header);
